@@ -152,6 +152,7 @@ def main(cfg, gpus):
         weights=cfg.MODEL.weights_decoder)
 
     crit = nn.NLLLoss(ignore_index=-1)
+    # crit = nn.CrossentropyLoss()
 
     if cfg.MODEL.arch_decoder.endswith('deepsup'):
         segmentation_module = models.SegmentationModule(
@@ -260,11 +261,11 @@ if __name__ == '__main__':
 	_C.TRAIN = CN()
 	_C.TRAIN.batch_size_per_gpu = 1
 	# epochs to train for
-	_C.TRAIN.num_epoch = 2
+	_C.TRAIN.num_epoch = 1
 	# epoch to start training. useful if continue from a checkpoint
 	_C.TRAIN.start_epoch = 0
 	# iterations of each epoch (irrelevant to batch size)
-	_C.TRAIN.epoch_iters = 500
+	_C.TRAIN.epoch_iters = 22
 
 	_C.TRAIN.optim = "SGD"
 	_C.TRAIN.lr_encoder = 0.02
@@ -280,7 +281,7 @@ if __name__ == '__main__':
 	# fix bn params, only under finetuning
 	_C.TRAIN.fix_bn = False
 	# number of data loading workers
-	_C.TRAIN.workers = 16
+	_C.TRAIN.workers = 1
 
 	# frequency to display
 	_C.TRAIN.disp_iter = 20
@@ -340,7 +341,7 @@ if __name__ == '__main__':
 	)
 	args = parser.parse_args(args=[])
 
-	cfg.merge_from_file(args.cfg)
+	# cfg.merge_from_file(args.cfg)
 	cfg.merge_from_list(args.opts)
 	
 	if not os.path.isdir(cfg.DIR):
