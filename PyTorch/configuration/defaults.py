@@ -5,7 +5,7 @@ from yacs.config import CfgNode as CN
 # -----------------------------------------------------------------------------
 
 _C = CN()
-_C.DIR = "ckpt/resnet50dilated-ppm_deepsup"
+_C.DIR = "ckpt/resnet18-upernet_lite"
 
 # -----------------------------------------------------------------------------
 # Dataset
@@ -31,9 +31,9 @@ _C.DATASET.random_flip = True
 # -----------------------------------------------------------------------------
 _C.MODEL = CN()
 # architecture of net_encoder
-_C.MODEL.arch_encoder = "resnet50"
+_C.MODEL.arch_encoder = "resnet18"
 # architecture of net_decoder
-_C.MODEL.arch_decoder = "ppm_deepsup"
+_C.MODEL.arch_decoder = "upernet_lite"
 # weights to finetune net_encoder
 _C.MODEL.weights_encoder = ""
 # weights to finetune net_decoder
@@ -47,11 +47,11 @@ _C.MODEL.fc_dim = 2048
 _C.TRAIN = CN()
 _C.TRAIN.batch_size_per_gpu = 1
 # epochs to train for
-_C.TRAIN.num_epoch = 2
+_C.TRAIN.num_epoch = 1
 # epoch to start training. useful if continue from a checkpoint
 _C.TRAIN.start_epoch = 0
 # iterations of each epoch (irrelevant to batch size)
-_C.TRAIN.epoch_iters = 500
+_C.TRAIN.epoch_iters = 2
 
 _C.TRAIN.optim = "SGD"
 _C.TRAIN.lr_encoder = 0.02
@@ -67,7 +67,7 @@ _C.TRAIN.deep_sup_scale = 0.4
 # fix bn params, only under finetuning
 _C.TRAIN.fix_bn = False
 # number of data loading workers
-_C.TRAIN.workers = 16
+_C.TRAIN.workers = 1
 
 # frequency to display
 _C.TRAIN.disp_iter = 20

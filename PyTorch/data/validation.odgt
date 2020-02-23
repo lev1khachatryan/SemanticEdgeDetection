@@ -1,5 +1,0 @@
-{"fpath_img": "train/origs/00000.jpg", "fpath_segm": "train/contours/00000.png", "width": 854, "height": 480}
-{"fpath_img": "train/origs/00001.jpg", "fpath_segm": "train/contours/00001.png", "width": 854, "height": 480}
-{"fpath_img": "train/origs/00002.jpg", "fpath_segm": "train/contours/00002.png", "width": 854, "height": 480}
-{"fpath_img": "train/origs/00003.jpg", "fpath_segm": "train/contours/00003.png", "width": 854, "height": 480}
-{"fpath_img": "train/origs/00004.jpg", "fpath_segm": "train/contours/00004.png", "width": 854, "height": 480}
