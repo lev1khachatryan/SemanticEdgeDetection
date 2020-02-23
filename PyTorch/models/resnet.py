@@ -2,16 +2,15 @@ import torch.nn as nn
 import math
 from .utils import load_url
 from lib.nn import SynchronizedBatchNorm2d
-BatchNorm2d = SynchronizedBatchNorm2d
+# BatchNorm2d = SynchronizedBatchNorm2d
+BatchNorm2d = nn.BatchNorm2d
 
 
-__all__ = ['ResNet', 'resnet18', 'resnet50', 'resnet101']
+__all__ = ['ResNet','resnet50']
 
 
 model_urls = {
-    'resnet18': 'http://sceneparsing.csail.mit.edu/model/pretrained_resnet/resnet18-imagenet.pth',
-    'resnet50': 'http://sceneparsing.csail.mit.edu/model/pretrained_resnet/resnet50-imagenet.pth',
-    'resnet101': 'http://sceneparsing.csail.mit.edu/model/pretrained_resnet/resnet101-imagenet.pth'
+    'resnet50': 'http://sceneparsing.csail.mit.edu/model/pretrained_resnet/resnet50-imagenet.pth'
 }
 
 
@@ -157,17 +156,6 @@ class ResNet(nn.Module):
 
         return x
 
-def resnet18(pretrained=False, **kwargs):
-    """Constructs a ResNet-18 model.
-
-    Args:
-        pretrained (bool): If True, returns a model pre-trained on ImageNet
-    """
-    model = ResNet(BasicBlock, [2, 2, 2, 2], **kwargs)
-    if pretrained:
-        model.load_state_dict(load_url(model_urls['resnet18']))
-    return model
-
 def resnet50(pretrained=False, **kwargs):
     """Constructs a ResNet-50 model.
 
@@ -177,16 +165,4 @@ def resnet50(pretrained=False, **kwargs):
     model = ResNet(Bottleneck, [3, 4, 6, 3], **kwargs)
     if pretrained:
         model.load_state_dict(load_url(model_urls['resnet50']), strict=False)
-    return model
-
-
-def resnet101(pretrained=False, **kwargs):
-    """Constructs a ResNet-101 model.
-
-    Args:
-        pretrained (bool): If True, returns a model pre-trained on ImageNet
-    """
-    model = ResNet(Bottleneck, [3, 4, 23, 3], **kwargs)
-    if pretrained:
-        model.load_state_dict(load_url(model_urls['resnet101']), strict=False)
     return model
